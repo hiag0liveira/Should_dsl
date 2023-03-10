@@ -1,0 +1,96 @@
+>>> from should_dsl import should, should_not, add_predicate_regex
+
+>>> class Foo(object):
+...     def __init__(self, valid=True):
+...         self.valid = valid
+...         self.sleeping = True
+...         self._doing_some_private_things = False
+...     def __str__(self):
+...         return '<foo object>'
+
+>>> Foo() |should| be_valid
+
+>>> Foo() |should_not| be_valid
+Traceback (most recent call last):
+    ...
+ShouldNotSatisfied: expected valid to be False, got True
+
+>>> Foo(False) |should| be_valid
+Traceback (most recent call last):
+    ...
+ShouldNotSatisfied: expected valid to be True, got False
+
+>>> Foo(False) |should_not| be_valid
+
+>>> Foo() |should| be_sleeping
+
+>>> Foo() |should_not| be_sleeping
+Traceback (most recent call last):
+    ...
+ShouldNotSatisfied: expected sleeping to be False, got True
+
+
+
+
+>>> be_valid
+Traceback (most recent call last):
+    ...
+NameError: name 'be_valid' is not defined
+
+>>> Foo() |should| be_valid
+
+>>> be_valid
+Traceback (most recent call last):
+    ...
+NameError: name 'be_valid' is not defined
+
+
+
+>>> Foo() |should| be_doing_some_private_things
+Traceback (most recent call last):
+    ...
+NameError: name 'be_doing_some_private_things' is not defined
+
+>>> Foo() |should| be__doing_some_private_things
+Traceback (most recent call last):
+    ...
+NameError: name 'be__doing_some_private_things' is not defined
+
+
+
+>>> be_valid = 'hey, i exist!!'
+>>> Foo() |should| be_valid
+
+>>> be_valid
+'hey, i exist!!'
+
+
+
+>>> add_predicate_regex(r'is_really_(.+)')
+>>> class Integer(int):
+...     def __init__(self, value):
+...         self.is_really_positive = value >= 0
+...         self.isodd = (value % 2 == 1) 
+>>> Integer(10) |should| be_positive
+>>> Integer(1) |should| be_odd
+
+>>> class Float(float):
+...     def __init__(self, value):
+...         self.is_negative = value < 0
+>>> Float(-1) |should| be_negative
+
+
+>>> from should_dsl import should_not
+>>> class EmptyObject(object):
+...     def __len__(self):
+...         return 0
+...
+...     def __zero__(self):
+...         return True
+... 
+>>> obj = EmptyObject()
+>>> obj |should| be_empty
+>>> obj.empty = False
+>>> obj |should_not| be_empty
+>>> del obj.empty
+>>> obj |should| be_empty

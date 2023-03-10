@@ -1,0 +1,15 @@
+To install should_dsl you just need to have setuptools installed (it's a dependency).
+
+There is just a little step to install should_dsl, and it is:
+$ [sudo] python setup.py install
+
+Now you can use should_dsl!
+
+You can use PyPI and install through pip or easy_install:
+$ [sudo] pip install should-dsl
+
+or
+
+$ [sudo] easy_install should-dsl
+
+Enjoy it!

@@ -1,0 +1,6 @@
+include *.rst
+include LICENSE
+include INSTALL
+include CONTRIBUTORS
+include Makefile
+include *.py
