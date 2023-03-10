@@ -1,9 +1,0 @@
->>> from should_dsl import *
-
->>> 'Hello world' |should| start_with('Hello')
-
->>> 'Hello world' |should| start_with('Hola')
-Traceback (most recent call last):
-    ...
-ShouldNotSatisfied: 'Hello world' does not start with 'Hola'
-
